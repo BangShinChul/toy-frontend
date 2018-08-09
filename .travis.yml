@@ -1,18 +1,17 @@
 language: node_js
-os:
-  - linux
-  node_js: 8
+node_js: 8
 
 branches:
   only:
     - master
 
-# 실행 전 travis에서 동작될 사항들
-before_install:
+cache:
+  directories:
+    - '$HOME/node_modules'
 
 script:
-    - './npm install'
-    - './npm run build'
+    - 'npm install'
+    - 'npm run build'
 
 # CI 실행 완료시 메일로 알람
 notifications:
