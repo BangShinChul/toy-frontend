@@ -12,7 +12,24 @@ cache:
 script:
     - 'npm install'
     - 'npm run build'
-    - 'aws s3 cp dist s3://bangshinchul.com --recursive'
+
+before_deploy:
+    - mkdir -p deploy # deploy 디렉터리를 생성합니다.
+    - mv dist deploy/dist # 생성한 deploy 디렉터리안에 빌드 후 생성된 dist 디렉터리를 넣습니다.
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
+    bucket: bangshinchul.com # S3 버킷
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: public_read
+    local_dir: deploy # before_deploy에서 생성한 디렉토리안의 내용을 s3로 전달합니다.
+    wait-until-deployed: true
+    on:
+      repo: BangShinChul/toy-frontend
+      branch: master
 
 # CI 실행 완료시 메일로 알람
 notifications:
