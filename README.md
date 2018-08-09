@@ -44,7 +44,48 @@ npm run build
 echo "> Build 파일 S3 배포"
 aws s3 cp dist s3://bangshinchul.com --recursive
 ```
-다음엔 Travis를 이용한 자동배포를 구현해보겠습니다. 180809<br>
+### Travis CI를 통한 frontend 프로젝트 자동배포 travis.yml 파일
+```
+// .travis.yml
+
+language: node_js
+node_js: 8
+
+branches:
+  only:
+    - master
+
+cache:
+  directories:
+    - '$HOME/node_modules'
+
+script:
+    - 'npm install'
+    - 'npm run build'
+
+before_deploy:
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
+    bucket: bangshinchul.com # 배포할 S3 버킷
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: public_read
+    local_dir: dist # npm run build 실행 후 생성된 dist 디렉터리의 내용들을 s3에 배포합니다.
+    wait-until-deployed: true
+    on:
+      repo: BangShinChul/toy-frontend
+      branch: master
+
+# CI 실행 완료시 메일로 알람
+notifications:
+  email:
+    recipients:
+      - bsc0227@gmail.com
+
+```
 <br>
 업데이트 사항
 - 로그인 validation 기능 EventBus로 리다이렉팅 처리

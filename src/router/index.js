@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/pages/Main'
 import Home from '@/pages/Home'
+import ApiTest from '@/pages/ApiTest'
 
 Vue.use(Router)
 
@@ -17,6 +18,11 @@ export default new Router({
       path: '/Home',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/ApiTest',
+      name: 'ApiTest',
+      component: ApiTest
     }
   ]
 })

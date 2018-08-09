@@ -5,9 +5,11 @@ import App from './App'
 import router from './router'
 import VueCarousel from 'vue-carousel'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
 Vue.use(VueCarousel)
+Vue.use(axios)
 
 // vuex 사용할 시 주석 풀고 사용할 것
 const store = new Vuex.Store({
