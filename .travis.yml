@@ -12,6 +12,7 @@ cache:
 script:
     - 'npm install'
     - 'npm run build'
+    - 'aws s3 cp dist s3://bangshinchul.com --recursive'
 
 # CI 실행 완료시 메일로 알람
 notifications:
