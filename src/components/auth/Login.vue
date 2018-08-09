@@ -33,7 +33,6 @@
     <div class="btn-section">
       <button v-on:click="doLogin">Login</button>
       <button v-on:click="getAccount">Sign up</button>
-      <button v-on:click="EventTest">Emit Test</button>
     </div>
   </div>
 </template>
@@ -218,9 +217,6 @@ export default {
         }
         return false
       }
-    },
-    EventTest () {
-      this.$parent.$emit('clickIcon')
     }
   }
 }
