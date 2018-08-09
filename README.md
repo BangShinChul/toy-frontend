@@ -44,7 +44,7 @@ npm run build
 echo "> Build 파일 S3 배포"
 aws s3 cp dist s3://bangshinchul.com --recursive
 ```
-다음엔 Travis를 이용한 자동배포를 구현해보겠습니다.<br>
+다음엔 Travis를 이용한 자동배포를 구현해보겠습니다. 180809<br>
 <br>
 업데이트 사항
 - 로그인 validation 기능 EventBus로 리다이렉팅 처리
