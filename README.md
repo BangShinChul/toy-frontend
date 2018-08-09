@@ -25,7 +25,26 @@ For detailed explanation on how things work, checkout the [Nuxt.js docs](https:/
 ### Nuxt -> Vue로 변경 (18.08.09)
 > 브라우저에서의 애니메이션 처리로 인하여 Nuxt 프로젝트를 Vue로 변경하였습니다.
 ***
-배포 관련하여 추후 업데이트 하겠습니다.
+### Vue.js 배포 스크립트
+```
+#!/bin/bash
+
+REPOSITORY=/home/ec2-user/frontend-vue // frontend 프로젝트가 들어가 있는 디렉터리 경로
+cd $REPOSITORY/toy-frontend/ // frontend 프로젝트 디렉터리
+
+echo "> Git Pull"
+git pull
+
+echo "> Npm Install"
+npm install
+
+echo "> 프로젝트 Build 시작"
+npm run build
+
+echo "> Build 파일 S3 배포"
+aws s3 cp dist s3://bangshinchul.com --recursive
+```
+다음엔 Travis를 이용한 자동배포를 구현해보겠습니다.<br>
 <br>
 업데이트 사항
 - 로그인 validation 기능 EventBus로 리다이렉팅 처리
