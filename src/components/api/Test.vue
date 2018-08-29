@@ -11,7 +11,8 @@ export default {
   name: 'test',
   data: function () {
     return {
-      result: null
+      result: null,
+      apiAddr: this.$store.state.apiAddr
     }
   },
   mounted () {
@@ -19,7 +20,7 @@ export default {
   },
   methods: {
     testApi: function () {
-      axios.get('http://rest.bangshinchul.com:9000/').then(res => {
+      axios.get(this.apiAddr + '/main/').then(res => {
         this.result = res
       })
     }

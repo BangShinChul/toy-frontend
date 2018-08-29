@@ -38,7 +38,9 @@
 </template>
 
 <script>
-/* eslint-disable no-unused-expressions,no-sequences,eqeqeq */
+/* eslint-disable no-unused-expressions,no-sequences,eqeqeq,key-spacing,no-trailing-spaces,no-unused-vars */
+
+import axios from 'axios'
 
 export default {
   name: 'Login',
@@ -55,8 +57,8 @@ export default {
       span: null,
       timer: null,
 
-      emailVal: null,
-      pwdVal: null,
+      emailVal: null, // input email 값
+      pwdVal: null, // input password 값
 
       imsi_email: 'bsc0227@naver.com',
       imsi_pwd: '1234',
@@ -66,7 +68,9 @@ export default {
         'password_empty': '비밀번호를 입력해주세요.',
         'both_empty': '계정 정보를 입력해주세요.',
         'email_wrong': '정확한 이메일을 입력해주세요.',
-        'password_wrong': '정확한 비밀번호를 입력해주세요.'
+        'password_wrong': '정확한 비밀번호를 입력해주세요.',
+        'not_find_account': '해당 계정이 존재하지 않습니다.',
+        'has_error': '에러가 발생했습니다. 잠시후에 다시 시도해주세요.'
       },
 
       validation_code: null
@@ -95,7 +99,7 @@ export default {
   },
   methods: {
     rotate3d: function (x, y, z, rad) {
-      console.log('rotate3d is working')
+      // console.log('rotate3d is working')
       const value = `rotate3d(${x}, ${y}, ${z}, ${rad}rad)`
       // for (let i = 0; i < this.face.length; i++) {
       //   this.face[i].style.transform = value;
@@ -105,7 +109,7 @@ export default {
       this.muzzle.style.transform = value
     },
     focus: function (event) {
-      console.log('focus is working')
+      // console.log('focus is working')
       if (event) {
         event.target.classList.add('focused')
         this.copyStyles(event.target)
@@ -113,7 +117,7 @@ export default {
       }
     },
     reset: function (event) {
-      console.log('reset is working')
+      // console.log('reset is working')
       if (event) {
         event.target.classList.remove('focused')
         this.ryan.classList.remove('playing')
@@ -141,7 +145,7 @@ export default {
       window.document.body.appendChild(this.fauxInput)
     },
     look: function (event) {
-      console.log('look is working')
+      // console.log('look is working')
       if (event) {
         const el = event.target
         const text = el.value.substr(0, el.selectionStart)
@@ -160,7 +164,7 @@ export default {
       }
     },
     lookAway: function (event) {
-      console.log('lookAway is working')
+      // console.log('lookAway is working')
       if (event) {
         const el = event.target
         const ryanRect = this.ryan.getBoundingClientRect()
@@ -175,13 +179,28 @@ export default {
     },
     doLogin: function () {
       let result = this.validation()
-      console.log(this.validation_code + '\npwd type : ' + this.pwdVal + ' / ' + typeof this.pwdVal)
-      console.log('imsi_pwd : ' + this.imsi_pwd + ' / ' + typeof this.imsi_pwd)
-      if (result === false) {
-        // alert('validation_code : '+this.validation_code+'\nvalidation_msg : '+this.validation_msg[this.validation_code]);
-      } else {
-        this.$parent.$emit('LoginSuccess', true)
-        alert(result)
+      if (result) {
+        let postData = {
+          userId : this.emailVal,
+          userPassword : this.pwdVal
+        }
+
+        axios.post('http://localhost:9000/account/doLogin', postData).then(res => {
+          console.log('response param data : ')
+          console.log(res)
+
+          if (res.status !== 200) {
+            this.validation_code = 'has_error'
+          }
+
+          if (res.data === '0000') {
+            // 회원정보 있을 떄
+            this.$parent.$emit('LoginSuccess', true)
+          } else if (res.data === '0001') {
+            // 회원정보 없을 떄
+            this.validation_code = 'not_find_account'
+          }
+        })
       }
     },
     getAccount: function () {
@@ -197,26 +216,19 @@ export default {
       // email이 틀렸을 경우 : email_wrong
       // password가 틀렸을 경우 : password_wrong
 
-      if (this.emailVal == this.imsi_email && this.pwdVal == this.imsi_pwd) {
-        this.validation_code = null
-        return true
-      } else if (this.emailVal === null && this.pwdVal !== null) {
+      let returnVal = true
+      if (this.emailVal === null && this.pwdVal !== null) {
         this.validation_code = 'email_empty'
-        return false
+        returnVal = false
       } else if (this.emailVal !== null && this.pwdVal === null) {
         this.validation_code = 'password_empty'
-        return false
+        returnVal = false
       } else if (this.emailVal === null && this.pwdVal === null) {
         this.validation_code = 'both_empty'
-        return false
-      } else if (this.emailVal !== null && this.pwdVal !== null) {
-        if (this.emailVal != this.imsi_email) {
-          this.validation_code = 'email_wrong'
-        } else if (this.pwdVal != this.imsi_pwd) {
-          this.validation_code = 'password_wrong'
-        }
-        return false
+        returnVal = false
       }
+      console.log('returnVal : ' + returnVal)
+      return returnVal
     }
   }
 }
@@ -243,6 +255,17 @@ export default {
     background: #f8d348;
     display: flex;
     flex-direction: column;
+  }
+
+  .btn-section > button{
+    margin-top: 50px;
+    padding: 10px 40px;
+    border: none;
+    background-color: white;
+  }
+  .btn-section > button:hover{
+    background-color: black;
+    color: #fff;
   }
 
   svg {

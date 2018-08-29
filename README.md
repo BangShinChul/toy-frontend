@@ -1,26 +1,9 @@
 # toy project 프론트엔드 (Vue.js Nuxt)
-
 > toy project frontend part
-
-## Build Setup
-
-``` bash
-# install dependencies
-$ npm install # Or yarn install
-
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm start
-
-# generate static project
-$ npm run generate
-```
-
-For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
-
+***
+### 18.08.29 메인페이지 버튼 UI 변경 및 Sign Up 페이지 구현
+***
+### 18.08.16 favicon 설정 완료
 ***
 ### Nuxt -> Vue로 변경 (18.08.09)
 > 브라우저에서의 애니메이션 처리로 인하여 Nuxt 프로젝트를 Vue로 변경하였습니다.

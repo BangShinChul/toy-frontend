@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
@@ -9,12 +10,21 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 Vue.use(VueCarousel)
-Vue.use(axios)
+// Vue.use(axios)
 
-// vuex 사용할 시 주석 풀고 사용할 것
+let domainCheck = window.location.host
+let apiAddr = null
+if (domainCheck.indexOf(domainCheck) !== -1) {
+  apiAddr = 'http://localhost:9000'
+} else {
+  apiAddr = 'http://rest.bangshinchul.com:9000'
+}
 const store = new Vuex.Store({
   state: {
     // 변수
+    loginMessage: '',
+    apiAddr: apiAddr,
+    hostName: domainCheck
   },
   mutations: { // 메서드
   }

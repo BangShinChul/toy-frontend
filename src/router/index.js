@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Main from '@/pages/Main'
 import Home from '@/pages/Home'
 import ApiTest from '@/pages/ApiTest'
+import SignUp from '@/components/auth/SignUp'
 
 Vue.use(Router)
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/ApiTest',
       name: 'ApiTest',
       component: ApiTest
+    },
+    {
+      path: '/SignUp',
+      name: 'SignUp',
+      component: SignUp
     }
   ]
 })
