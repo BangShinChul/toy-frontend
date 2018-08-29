@@ -33,7 +33,7 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$store.state.hostName)
+    console.log(this.$store.state.apiAddr)
   },
   methods: {
     getAccount: function () {

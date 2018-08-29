@@ -14,7 +14,7 @@ Vue.use(VueCarousel)
 
 let domainCheck = window.location.host
 let apiAddr = null
-if (domainCheck.indexOf(domainCheck) !== -1) {
+if (domainCheck.indexOf('localhost') !== -1) {
   apiAddr = 'http://localhost:9000'
 } else {
   apiAddr = 'http://rest.bangshinchul.com:9000'
@@ -23,8 +23,7 @@ const store = new Vuex.Store({
   state: {
     // 변수
     loginMessage: '',
-    apiAddr: apiAddr,
-    hostName: domainCheck
+    apiAddr: apiAddr
   },
   mutations: { // 메서드
   }
