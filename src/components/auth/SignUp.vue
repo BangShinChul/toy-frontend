@@ -7,6 +7,7 @@
     <input id="name" type="text" placeholder="NAME" v-model="nameVal" required><br>
     <div class="btn-section">
       <button v-on:click="getAccount">Create Account</button>
+      <button v-on:click="goToBack">Go Back</button>
     </div>
   </div>
 </template>
@@ -63,6 +64,9 @@ export default {
           }
         })
       }
+    },
+    goToBack: function () {
+      window.location.href = '../'
     },
     validation () {
       let returnVal = true

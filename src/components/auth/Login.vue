@@ -3,9 +3,9 @@
     <svg id="ryan" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
       <path d="M0,150 C0,65 120,65 120,150" fill="#e0a243" stroke="#000" stroke-width="2.5"/>
       <g id="ears" class="ears">
-        <path d="M46,32 L46,30 C46,16 26,16 26,30 L26,32" fill="#e0a243" stroke="#000" stroke-width="2.5"
+        <path d="M46,40 L46,30 C46,16 26,16 26,30 L26,40" fill="#e0a243" stroke="#000" stroke-width="2.5"
               stroke-linecap="round" transform="rotate(-10,38,24)"/>
-        <path d="M74,32 L74,30 C74,16 94,16 94,30 L94,32" fill="#e0a243" stroke="#000" stroke-width="2.5"
+        <path d="M74,40 L74,30 C74,16 94,16 94,30 L94,40" fill="#e0a243" stroke="#000" stroke-width="2.5"
               stroke-linecap="round" transform="rotate(10,82,24)"/>
       </g>
       <circle cx="60" cy="60" r="40" fill="#e0a243" stroke="#000" stroke-width="2.5"/>
@@ -27,7 +27,7 @@
       </g>
       <path d="M40,105 C10,140 110,140 80,105 L80,105 L70,111 L60,105 L50,111 L40,105" fill="#fff"/>
     </svg>
-    <p v-if="validation_code !== null" v-text="validation_msg[validation_code]"></p>
+    <p class="validation-msg" v-if="validation_code !== null" v-text="validation_msg[validation_code]"></p>
     <input id="email" type="text" placeholder="email@domain.com" v-model="emailVal" required>
     <input id="password" type="password" placeholder="Password" v-model="pwdVal" required>
     <div class="btn-section">
@@ -204,7 +204,6 @@ export default {
       }
     },
     getAccount: function () {
-      alert('sign up')
       window.location.href = '../SignUp'
       // router.go('/SignUp');
       // window.document.href='../SignUp';
@@ -264,7 +263,8 @@ export default {
     background-color: white;
   }
   .btn-section > button:hover{
-    background-color: black;
+    background-color: #e0a243;
+    border-color: #e0a243;
     color: #fff;
   }
 
@@ -284,6 +284,16 @@ export default {
     outline: 0;
     padding: 10px 15px;
     margin-top: 15px;
+  }
+
+  .validation-msg {
+    border: 1px solid #e0a243;
+    background-color: #e0a243;
+    color: #fff;
+    padding: 10px 30px;
+    margin: 0 auto 25px auto;
+    border-radius: 5px;
+    text-align: center;
   }
 
   @keyframes lookaway-up {
