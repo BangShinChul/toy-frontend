@@ -1,6 +1,6 @@
 <template>
   <div class="hello-carousel">
-    <carousel :per-page='1' :pagination-enabled='false' :loop='true'>
+    <carousel :per-page='1' :pagination-enabled='false' :navigation-enabled='false' :autoplay="true" :autoplay-timeout="5000" :loop='true'>
       <slide>
         <h1 class="title">
           환영합니다!

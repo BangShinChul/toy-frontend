@@ -1,17 +1,19 @@
 <template>
     <div class="app">
-      <coin-rotate></coin-rotate>
-      <p>반가워요! 로그인에 성공하셨군요!</p>
-      <p v-if="this.$store.state.loginMessage !== ''">{{this.$store.state.loginMessage}}</p>
-      <p v-if="this.$store.state.loginMessage === ''">loginMessage가 비어있습니다.</p>
+      <left-side-bar></left-side-bar>
+      <div>
+        contents
+      </div>
     </div>
 </template>
 
 <script>
 import CoinRotate from '../components/test/CoinRotate'
+import LeftSideBar from '../components/common/LeftSideBar'
 export default {
   name: 'Home',
   components: {
+    LeftSideBar,
     CoinRotate
   }
 }
