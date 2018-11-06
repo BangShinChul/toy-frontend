@@ -17,6 +17,14 @@ export default {
 
 <style scoped lang="scss">
 body {
+  ul {
+    list-style: none;
+    padding: 0px;
+    text-align: left;
+    li {
+      padding: 10px 0px;
+    }
+  }
   background-color: lightblue;
 }
 </style>

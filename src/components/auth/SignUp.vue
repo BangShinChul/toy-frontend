@@ -43,11 +43,13 @@ export default {
       let result = this.validation()
       if (result) {
         let postData = {
-          userId: this.emailVal,
-          userPassword: this.pwdVal
+          userId: this.idVal,
+          userPassword: this.pwdVal,
+          userEmail: this.emailVal,
+          userName: this.nameVal
         }
 
-        axios.post('http://localhost:9000/account/checkAccount', postData).then(res => {
+        axios.post('http://localhost:9000/account/signUp', postData).then(res => {
           console.log('response param data : ')
           console.log(res)
 
@@ -58,9 +60,10 @@ export default {
           if (res.data === '0000') {
             // 회원정보 있을 떄
             this.validation_code = 'duplicate_account'
-          } else if (res.data === '0001') {
-            // 회원정보 없을 떄
-            this.validation_code = 'perfect_account'
+          } else if (res.data) {
+            // 가입완료
+            alert('가입완료!')
+            this.goToBack()
           }
         })
       }
