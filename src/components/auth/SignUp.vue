@@ -29,7 +29,8 @@ export default {
         'perfect_account': '해당 정보로 가입하실 수 있습니다!',
         'has_error': '에러가 발생했습니다. 잠시후에 다시 시도해주세요.'
       },
-      validation_code: null
+      validation_code: null,
+      apiAddr: this.$store.state.apiAddr
     }
   },
   mounted () {
@@ -49,7 +50,7 @@ export default {
           userName: this.nameVal
         }
 
-        axios.post('http://localhost:9000/account/signUp', postData).then(res => {
+        axios.post(this.apiAddr + '/account/signUp', postData).then(res => {
           console.log('response param data : ')
           console.log(res)
 

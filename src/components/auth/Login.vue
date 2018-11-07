@@ -73,7 +73,8 @@ export default {
         'has_error': '에러가 발생했습니다. 잠시후에 다시 시도해주세요.'
       },
 
-      validation_code: null
+      validation_code: null,
+      apiAddr: this.$store.state.apiAddr
     }
   },
   created () {
@@ -185,7 +186,7 @@ export default {
           userPassword : this.pwdVal
         }
 
-        axios.post('http://localhost:9000/account/doLogin', postData).then(res => {
+        axios.post(this.apiAddr + '/account/doLogin', postData).then(res => {
           console.log('response param data : ')
           console.log(res)
 

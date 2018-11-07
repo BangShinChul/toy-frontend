@@ -12,30 +12,34 @@ Vue.use(Vuex)
 Vue.use(VueCarousel)
 // Vue.use(axios)
 
-let domainCheck = window.location.host
-let apiAddr = null
-if (domainCheck.indexOf('localhost') !== -1) {
-  apiAddr = 'http://localhost:9000'
-} else {
-  apiAddr = 'http://rest.bangshinchul.com:9000'
-}
-const store = new Vuex.Store({
-  state: {
-    // 변수
-    loginMessage: '',
-    apiAddr: apiAddr
-  },
-  mutations: { // 메서드
+document.addEventListener('DOMContentLoaded', function () {
+  let domainCheck = window.location.host
+  let apiAddr = null
+
+  if (domainCheck.indexOf('localhost') !== -1) {
+    apiAddr = 'http://localhost:9000'
+  } else {
+    apiAddr = 'http://rest.bangshinchul.com:9000'
   }
-})
 
-Vue.config.productionTip = true
+  const store = new Vuex.Store({
+    state: {
+      // 변수
+      loginMessage: '',
+      apiAddr: apiAddr
+    },
+    mutations: { // 메서드
+    }
+  })
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  store,
-  components: { App },
-  template: '<App/>'
+  Vue.config.productionTip = true
+
+  /* eslint-disable no-new */
+  new Vue({
+    el: '#app',
+    router,
+    store,
+    components: { App },
+    template: '<App/>'
+  })
 })

@@ -28,6 +28,9 @@ export default {
       this.isLogin = data
       window.location.href = '/home'
     })
+  },
+  mounted () {
+    console.log('api address : ' + this.$store.state.apiAddr)
   }
 }
 </script>
