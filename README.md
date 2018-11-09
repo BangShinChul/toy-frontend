@@ -1,13 +1,6 @@
 # toy project 프론트엔드 (Vue.js Nuxt)
 > toy project frontend part
-***
-### 18.08.29 메인페이지 버튼 UI 변경 및 Sign Up 페이지 구현
-***
-### 18.08.16 favicon 설정 완료
-***
-### Nuxt -> Vue로 변경 (18.08.09)
-> 브라우저에서의 애니메이션 처리로 인하여 Nuxt 프로젝트를 Vue로 변경하였습니다.
-***
+
 ### Vue.js 배포 스크립트
 ```
 #!/bin/bash
@@ -69,11 +62,6 @@ notifications:
       - bsc0227@gmail.com
 
 ```
-<br>
-업데이트 사항
-- 로그인 validation 기능 EventBus로 리다이렉팅 처리
-
-***
 <이전의 Nuxt 버젼>
 ### Nuxt.js에서 브라우저에서 모듈을 불러와야 할 때 
 > 참고 : https://jason-awbrey.com/blog/creating-a-nuxt-plugin-get-past-window-undefined-issue-with-3rd-party-libraries/

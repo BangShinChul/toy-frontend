@@ -7,6 +7,13 @@ import router from './router'
 import VueCarousel from 'vue-carousel'
 import Vuex from 'vuex'
 import axios from 'axios'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faCoffee)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.use(Vuex)
 Vue.use(VueCarousel)
