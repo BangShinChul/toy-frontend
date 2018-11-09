@@ -1,8 +1,13 @@
 <template>
   <div class="left-side-bar-app">
     <button class="menu-toggle-btn" v-on:click="toggleMenu()">
-      메뉴
+      <font-awesome-icon icon="bars" v-if="isMenuHide"/>
+      <font-awesome-icon icon="times" v-if="!isMenuHide"/>
+      <!---->
+      <!--<i class="far fa-bars" v-if="isMenuHide"></i>-->
+      <!--<i class="far fa-times" v-if="!isMenuHide"></i>-->
     </button>
+
     <ul id="menu-bar-wrapper" v-bind:class="{hide: isMenuHide, active: !isMenuHide}">
       <li v-on:click="GoTo(0)">Home</li>
       <li v-on:click="GoTo(1)">게시판</li>
@@ -39,14 +44,16 @@ export default {
     left: 0;
     top: 0;
     margin: 9px;
-    padding: 10px 25px;
-    border-radius: 14px;
+    background-color: #fff;
+    font-size: 25px;
+    /*padding: 10px 25px;*/
+    /*border-radius: 14px;*/
     border: none;
     cursor: pointer;
 
     &:hover {
-      background-color: black;
-      color: #fff;
+      /*background-color: black;*/
+      /*color: #fff;*/
     }
   }
   ul {
@@ -63,12 +70,12 @@ export default {
 
     transition: all 1.5s;
     &.active {
-      transition-timing-function: ease-out;
+      transition-timing-function: ease-in-out;
       transform:translate(0,0)
     }
     &.hide {
       transition-timing-function: ease-out;
-      transform:translate(-220px,0)
+      transform:translate(-300px,0)
     }
 
     li {
