@@ -5,6 +5,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueCarousel from 'vue-carousel'
+import VueCookie from 'vue-cookie'
 import Vuex from 'vuex'
 import axios from 'axios'
 
@@ -17,6 +18,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.use(Vuex)
 Vue.use(VueCarousel)
+Vue.use(VueCookie)
 // Vue.use(axios)
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -33,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
     state: {
       // 변수
       loginMessage: '',
+      myId: '',
       apiAddr: apiAddr
     },
     mutations: { // 메서드

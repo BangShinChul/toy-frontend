@@ -31,6 +31,16 @@ export default {
   },
   mounted () {
     console.log('api address : ' + this.$store.state.apiAddr)
+    this.loginCheck() // 현재 로그인상태인지 체크
+  },
+  methods: {
+    loginCheck: function () {
+      this.isLogin = this.$cookie.get('userId') // 로그인한 계정의 쿠키 데이터가 있는지 가져옴
+      if (this.isLogin) {
+        console.log('로그인된 상태입니다.\nuserId cookie : ' + this.isLogin)
+        window.location.href = '/home'
+      }
+    }
   }
 }
 </script>

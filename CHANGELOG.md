@@ -1,3 +1,11 @@
+### 18.11.20 로그인 기능 일부 변경 및 추가 
+- vue-cookie 추가 (로그인 세션 체크용)
+- 로그인 이메일 말고 userId로 로그인하도록 변경
+- 로그아웃 기능 추가 
+
+<br>
+<br>
+
 ### 18.11.09 font-awesome 추가 
 > https://fontawesome.com/how-to-use/on-the-web/using-with/vuejs
 

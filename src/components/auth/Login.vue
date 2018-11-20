@@ -28,7 +28,7 @@
       <path d="M40,105 C10,140 110,140 80,105 L80,105 L70,111 L60,105 L50,111 L40,105" fill="#fff"/>
     </svg>
     <p class="validation-msg" v-if="validation_code !== null" v-text="validation_msg[validation_code]"></p>
-    <input id="email" type="text" placeholder="email@domain.com" v-model="emailVal" required>
+    <input id="userId" type="text" placeholder="ID" v-model="idVal" required>
     <input id="password" type="password" placeholder="Password" v-model="pwdVal" required>
     <div class="btn-section">
       <button v-on:click="doLogin">Login</button>
@@ -51,13 +51,13 @@ export default {
       ears: null,
       eyes: null,
       muzzle: null,
-      email: null,
+      userId: null,
       password: null,
       fauxInput: null,
       span: null,
       timer: null,
 
-      emailVal: null, // input email 값
+      idVal: null, // input id 값
       pwdVal: null, // input password 값
 
       imsi_email: 'bsc0227@naver.com',
@@ -67,10 +67,11 @@ export default {
         'email_empty': '이메일을 입력해주세요.',
         'password_empty': '비밀번호를 입력해주세요.',
         'both_empty': '계정 정보를 입력해주세요.',
-        'email_wrong': '정확한 이메일을 입력해주세요.',
+        'email_wrong': '정확한 ID를 입력해주세요.',
         'password_wrong': '정확한 비밀번호를 입력해주세요.',
-        'not_find_account': '해당 계정이 존재하지 않습니다.',
-        'has_error': '에러가 발생했습니다. 잠시후에 다시 시도해주세요.'
+        'not_find_account': '로그인 정보가 맞지 않습니다. 계정 정보를 다시 확인해주세요.',
+        'has_error': '에러가 발생했습니다. 잠시후에 다시 시도해주세요.',
+        'has_error_redis': '에러가 발생했습니다. code : 0002'
       },
 
       validation_code: null,
@@ -86,15 +87,15 @@ export default {
     this.ears = window.document.getElementById('ears'),
     this.eyes = window.document.getElementById('eyes'),
     this.muzzle = window.document.getElementById('muzzle'),
-    this.email = window.document.getElementById('email'),
+    this.userId = window.document.getElementById('userId'),
     this.password = window.document.getElementById('password'),
     this.fauxInput = window.document.createElement('div'),
     this.span = window.document.createElement('span'),
     this.fauxInput.appendChild(this.span)
-    this.email.addEventListener('focus', this.focus, false)
-    this.email.addEventListener('keyup', this.look, false)
-    this.email.addEventListener('click', this.look, false)
-    this.email.addEventListener('blur', this.reset, false)
+    this.userId.addEventListener('focus', this.focus, false)
+    this.userId.addEventListener('keyup', this.look, false)
+    this.userId.addEventListener('click', this.look, false)
+    this.userId.addEventListener('blur', this.reset, false)
     this.password.addEventListener('focus', this.lookAway, false)
     this.password.addEventListener('blur', this.reset, false)
   },
@@ -182,7 +183,7 @@ export default {
       let result = this.validation()
       if (result) {
         let postData = {
-          userId : this.emailVal,
+          userId : this.idVal,
           userPassword : this.pwdVal
         }
 
@@ -196,10 +197,19 @@ export default {
 
           if (res.data === '0000') {
             // 회원정보 있을 떄
+            this.$store.state.myId = this.idVal
+
+            // 로그인 데이터 쿠키 저장
+            this.$cookie.set('userId', this.idVal, 3) // userId라는 키값으로 아이디를 3시간동안 쿠키 저장
+            console.log('cookie 저장 : ' + this.$cookie.get('userId'))
             this.$parent.$emit('LoginSuccess', true)
           } else if (res.data === '0001') {
-            // 회원정보 없을 떄
+            // 회원정보 없거나 비밀번호가 맞지 않을 때
             this.validation_code = 'not_find_account'
+          } else if (res.data === '0002') {
+            this.validation_code = 'has_error_redis'
+          } else if (res.data === '0003') {
+            this.validation_code = 'password_wrong'
           }
         })
       }
@@ -217,13 +227,13 @@ export default {
       // password가 틀렸을 경우 : password_wrong
 
       let returnVal = true
-      if (this.emailVal === null && this.pwdVal !== null) {
+      if (this.idVal === null && this.pwdVal !== null) {
         this.validation_code = 'email_empty'
         returnVal = false
-      } else if (this.emailVal !== null && this.pwdVal === null) {
+      } else if (this.idVal !== null && this.pwdVal === null) {
         this.validation_code = 'password_empty'
         returnVal = false
-      } else if (this.emailVal === null && this.pwdVal === null) {
+      } else if (this.idVal === null && this.pwdVal === null) {
         this.validation_code = 'both_empty'
         returnVal = false
       }
