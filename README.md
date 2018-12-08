@@ -1,6 +1,12 @@
 # toy project 프론트엔드 (Vue.js Nuxt)
 > toy project frontend part
 
+<br>
+
+<a href="../CHANGELOG.md">CHANGELOG</a>
+
+<br>
+
 ### Vue.js 배포 스크립트
 ```
 #!/bin/bash
