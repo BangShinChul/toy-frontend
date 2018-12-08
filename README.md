@@ -3,7 +3,7 @@
 
 <br>
 
-<a href="../CHANGELOG.md">CHANGELOG</a>
+<a href="./CHANGELOG.md">CHANGELOG</a>
 
 <br>
 
